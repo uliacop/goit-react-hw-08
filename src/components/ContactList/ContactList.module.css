@@ -1,14 +1,17 @@
-.list {
-  margin: 0;
-  padding: 0;
+.contact_list {
   display: flex;
-  gap: 16px;
-  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
   flex-wrap: wrap;
+  border-radius: 50%;
 }
 
-.item {
-  max-width: 600px;
-  list-style: none;
-  /*  flex-basis: calc((100% - 30px) / 4); */
+.contact_list > li {
+  background-color: rgba(206, 206, 216, 0.81);
+  border-radius: 8px;
+  min-width: 340px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -1,40 +1,29 @@
-.container {
+.wrapper_contact {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #000;
-  background-color: rgb(233, 218, 233);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 350px;
-  gap: 15px;
-}
-
-.user,
-.phone {
-  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
-  align-items: center;
+  border-radius: 8px;
 }
-.button {
-  padding: 10px 20px;
-  font-size: 16px;
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.delete_button {
   border: none;
-  border-radius: 5px;
-  background-color: #dd94c1;
-  color: #fff;
-  cursor: pointer;
-  margin: 10px;
-  width: 130px;
-  height: 50px;
+  border-radius: 20px;
+  font-weight: 500;
+  padding: 10px;
+  width: 80px;
+  font-size: 16px;
 }
 
-.button:hover {
-  background-color: #ca89b7;
-}
-
-.button:focus {
-  background-color: #702d70;
+.delete_button:hover {
+  background-color: rgb(99, 99, 141);
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid black;
 }

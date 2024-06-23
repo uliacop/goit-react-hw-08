@@ -1,13 +1,18 @@
-.label,
-.input {
-  margin-bottom: 10px;
-}
-.wrapper {
-  border: 1px solid #ddd;
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 250px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 210px;
-  margin-bottom: 15px;
-  padding: 15px;
-  background-color: rgb(253, 221, 253);
+  border: 1px solid black;
+  font-size: 16px;
+}
+
+.query {
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 16px;
 }

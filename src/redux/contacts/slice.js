@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts } from "./contactsOps";
-import { addContact, deleteContact } from "./contactsOps";
+import { fetchContacts } from "./operations";
+import { addContact, deleteContact } from "./operations";
+import toast from "react-hot-toast";
 
 export const INITIAL_STATE = {
   contacts: {
@@ -12,41 +13,59 @@ export const INITIAL_STATE = {
     name: "",
   },
 };
-const handleRejected = (state, action) => {
+const handleRejected = (state) => {
   state.loading = false;
-  state.items = action.payload;
+  state.error = true;
 };
 
 const handlePending = (state) => {
   state.loading = true;
+  state.error = false;
 };
 
-const contactsSlice = createSlice({
+const slice = createSlice({
   name: "contacts",
   initialState: INITIAL_STATE.contacts,
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, handlePending)
+      .addCase(addContact.pending, handlePending)
+      .addCase(deleteContact.pending, handlePending)
+
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
       })
-      .addCase(fetchContacts.rejected, handleRejected)
-      .addCase(addContact.pending, handlePending)
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items.push(action.payload);
+        toast("You add a new contact!", {
+          style: {
+            borderRadius: "10px",
+            background: "rgb(144, 26, 228)",
+            color: "#fff",
+          },
+        });
       })
-      .addCase(addContact.rejected, handleRejected)
-      .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items = state.items.filter(
           (item) => item.id !== action.payload.id
         );
+        toast(`You deleted ${action.payload.name}!`, {
+          style: {
+            borderRadius: "10px",
+            background: "rgb(144, 26, 228)",
+            color: "#fff",
+          },
+        });
       })
+
+      .addCase(fetchContacts.rejected, handleRejected)
+      .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.rejected, handleRejected);
   },
 });
 
-export const contactsReducer = contactsSlice.reducer;
+export const contactsReducer = slice.reducer;
