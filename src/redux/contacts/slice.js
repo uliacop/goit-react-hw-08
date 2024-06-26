@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts } from "./operations";
-import { addContact, deleteContact } from "./operations";
+import { addContact, deleteContact, changeContact } from "./operations";
 import toast from "react-hot-toast";
 
 export const INITIAL_STATE = {
@@ -61,10 +61,26 @@ const slice = createSlice({
           },
         });
       })
-
+      .addCase(changeContact.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.items.findIndex(
+          (contact) => contact.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+        toast("You updated the contact!", {
+          style: {
+            borderRadius: "10px",
+            background: "rgb(144, 26, 228)",
+            color: "#fff",
+          },
+        });
+      })
       .addCase(fetchContacts.rejected, handleRejected)
       .addCase(addContact.rejected, handleRejected)
-      .addCase(deleteContact.rejected, handleRejected);
+      .addCase(deleteContact.rejected, handleRejected)
+      .addCase(changeContact.rejected, handleRejected);
   },
 });
 
